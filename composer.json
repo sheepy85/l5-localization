@@ -1,0 +1,25 @@
+{
+	"name" : "sheepy85/l5-localization" ,
+	"description" : "" ,
+	"authors" : [
+		{
+			"name" : "sheepy85" ,
+			"email" : "sheepy85@gmail.com"
+		}
+	] ,
+	"require" : {
+		"php" : ">=5.4.0" ,
+		"illuminate/support" : "5.0.*"
+	} ,
+	"autoload" : {
+		"classmap" : [
+		] ,
+		"files" : [
+			"src/Sheepy85/L5Localization/helpers.php"
+		] ,
+		"psr-0" : {
+			"Sheepy85\\L5Localization\\" : "src/"
+		}
+	} ,
+	"minimum-stability" : "stable"
+}
