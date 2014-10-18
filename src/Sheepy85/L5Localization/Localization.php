@@ -45,12 +45,19 @@ class Localization {
 	  $this->app->setLocale( $this->fallback );
    }
 
-   public function langs() {
+   public function langs( $withRaw = false ) {
 	  return $this->langs;
    }
 
-   public function route() {
+   public function router() {
 	  return $this->app[ 'l5-router' ];
+   }
+
+   public function route( $name , $parameters = array() , $absolute = true , $route = null ) {
+	  if ( $this->has() ) {
+		 $name = $this->get() . '.' . $name;
+	  }
+	  return $this->app[ 'url' ]->route( $name , $parameters , $absolute , $route );
    }
 
 }
