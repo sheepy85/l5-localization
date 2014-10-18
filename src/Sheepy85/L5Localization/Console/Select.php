@@ -18,7 +18,7 @@ class Select extends Command {
 	*
 	* @var string
 	*/
-   protected $description = 'Generate config and lang files for selected locales';
+   protected $description = 'Generate locale config and lang files for selected locales';
 
    /**
 	* Create a new command instance.
@@ -35,7 +35,16 @@ class Select extends Command {
 	* @return mixed
 	*/
    public function fire() {
-	  //
+
+	  $locales = $this->argument( 'locales' );
+
+	  if ( $this->option( 'list' ) ) {
+		 // show list
+		 return;
+	  }
+
+	  //$locales 
+	  //make files
    }
 
    /**
@@ -45,7 +54,7 @@ class Select extends Command {
 	*/
    protected function getArguments() {
 	  return [
-		  ['locales' , InputArgument::REQUIRED , 'en, hu' ] ,
+		  [ 'locales' , InputArgument::REQUIRED | InputArgument::IS_ARRAY , 'en hu' ] ,
 	  ];
    }
 
@@ -56,7 +65,7 @@ class Select extends Command {
 	*/
    protected function getOptions() {
 	  return [
-		  [ ] ,
+		  [ 'list' , 'l' , InputOption::VALUE_NONE , 'Show locale list' ] ,
 	  ];
    }
 
