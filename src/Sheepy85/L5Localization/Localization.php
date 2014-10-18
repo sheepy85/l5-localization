@@ -11,7 +11,7 @@ class Localization {
 
    public function __construct( $app ) {
 	  $this->app = $app;
-	  $this->langs = $this->app[ 'config' ][ 'lang.languages' ];
+	  $this->langs = $this->app[ 'config' ][ 'locale.locales' ];
 	  $this->fallback = $this->app[ 'config' ][ 'app.fallback_locale' ];
    }
 
@@ -45,7 +45,30 @@ class Localization {
 	  $this->app->setLocale( $this->fallback );
    }
 
+   public function locale() {
+	  return $this->langs[ $this->get() ];
+   }
+
+   public function name() {
+	  return $this->langs[ $this->get() ][ 'name' ];
+   }
+
+   public function native() {
+	  return $this->langs[ $this->get() ][ 'native' ];
+   }
+
+   public function script() {
+	  return $this->langs[ $this->get() ][ 'script' ];
+   }
+
+   public function direction() {
+	  return $this->langs[ $this->get() ][ 'dir' ];
+   }
+
    public function langs( $withRaw = false ) {
+	  if ( $withRaw ) {
+		 return array_merge( [ null => null ] , $this->langs );
+	  }
 	  return $this->langs;
    }
 

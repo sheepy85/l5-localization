@@ -5,7 +5,6 @@ use Illuminate\Contracts\Routing\Middleware;
 use Sheepy85\L5Localization\Facades\Localization as Locale;
 
 class Localization implements Middleware {
-
    public function handle( $request , Closure $next ) {
 	  $segment = $request->segment( 1 );
 

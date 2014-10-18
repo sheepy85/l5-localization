@@ -20,7 +20,11 @@ class Router {
 			$uri = Lang::get( $uri , [ ] , $locale );
 		 }
 
-		 return $this->app[ 'router' ]->{$name}( $uri , [ 'as' => "$locale.$as" , 'uses' => $uses ] );
+		 if ( $locale ) {
+			$as = "$locale.$as";
+		 }
+
+		 return $this->app[ 'router' ]->{$name}( $uri , [ 'as' => $as , 'uses' => $uses ] );
 	  }
    }
 
