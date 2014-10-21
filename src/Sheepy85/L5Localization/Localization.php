@@ -112,7 +112,7 @@ class Localization {
     }
 
     /**
-     * Get current localizations
+     * Get current localization
      * 
      * @return array
      */
@@ -159,11 +159,11 @@ class Localization {
     /**
      * Get available localizations, optional empty first row
      * 
-     * @param bool $withRaw
+     * @param bool $withNull
      * @return array
      */
-    public function locales( $withRaw = false ) {
-        return $withRaw ? array_merge( [ null => null] , $this->_locales ) : $this->_locales;
+    public function locales( $withNull = false ) {
+        return $withNull ? array_merge( [ null => null] , $this->_locales ) : $this->_locales;
     }
 
     /**
