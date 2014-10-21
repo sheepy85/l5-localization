@@ -1,5 +1,14 @@
 l5-localization
 ===============
+Simple Localization Middleware for Laravel 5 to make dynamic prefixed route names to the same controller actions.
+
+Features
+---------
+* Seo friendly url generation: example.com/news, example.com/en/news, example.com/es/noticias, example.com/fr/nouvelles
+* Session stored Localization data.
+* Locale prefix Route names
+* Lang file stored Route url with model name
+* Route Cache
 
 Facade Alias : Locale
 
@@ -31,26 +40,38 @@ Step 3: Add the ServiceProvider
 ] ,
 ```
 
+Step 4: Use file generator
+```cmd
+> php artisan locale:select en es fr
+```
+to get the full list of Localization short codes use -l or --list
+
+
 ## Examples
 
-Example files in project folder [ config, lang ]
+Example files in project folder.
 
-Locale::langs() looking for config/locale.php, optional paramater [true] for raw url generation
+`Locale::locales()` looking for config/locale.php, set optional parameter to `true` for raw url generation
+`Locale::router()` return Laravel Router instance and only accept `[get, post, put, delete, patch]` methods
 
-Locale::router() return Laravel Router instance and only accept [get, post, put, delete, patch] methoods
 Generate route:cache for all of your languages
-If routes lang file don't have the key, use as Uri
+---------
+
+1 arg: If your routes lang file don't contain the route name, use as raw Uri
+2 arg: Route name
+3 arg: Action
+4 arg: Localization short code
 ```php
 // routes.php
-foreach ( Locale::langs( true ) as $key => $locale ) {
+foreach ( Locale::locales( true ) as $code => $locale ) {
    Route::group( [
-	   'prefix' => $key ,
-	   'namespace' => 'App\Http\Controllers' ,
-	   ] , function() use( $key ) {
+	   'namespace' => '\App\Http\Controllers' ,
+	   'prefix' => $code , 
+	   ] , function() use( $code ) {
 
-	  Locale::router()->get( '/' , 'home' , 'HomeController@index' , $key );
-	  Locale::router()->get( 'routes.news' , 'news' , 'HomeController@news' , $key );
-	  Locale::router()->post( 'login' , 'login' , 'AuthController@login' , $key );
+	  Locale::router()->get( '/' , 'home' , 'HomeController@index' , $code );
+	  Locale::router()->get( 'routes.news' , 'news' , 'HomeController@news' , $code );
+	  Locale::router()->post( 'login' , 'login' , 'AuthController@login' , $code );
    } );
 }
 ```
@@ -65,16 +86,33 @@ GET|HEAD en/news        | en.news  | App\Http\Controllers\HomeController@news
 POST en/login           | en.login | App\Http\Controllers\AuthController@login
 GET|HEAD hu             | hu.home  | App\Http\Controllers\HomeController@index
 GET|HEAD hu/hirek       | hu.news  | App\Http\Controllers\HomeController@news
-POST hu/login           | hu.login | App\Http\Controllers\AuthController@login
+POST hu/belepes         | hu.login | App\Http\Controllers\AuthController@login
 ```
 
-make Url with helper to the session current locale:
+make Url
+---------
+with helper to the session current locale:
 ```html
 {{ lroute('news') }}
 ```
 
-or laravel's helper
-notice need to comment out the original function in Illuminate\Foundation\helpers.php file
+or laravel's helper, notice need to comment out the original function in `Illuminate\Foundation\helpers.php` file
 ```html
 {{ route('news') }}
 ```
+
+Api Locale::
+---------
+* `has()` Determine localization status
+* `get()` Get current localization
+* `set( $locale )` Set current localization
+* `flush()` Unset Session variable
+* `exist( $locale )` Determine localization adjustable
+* `notExist( $locale )` Determine localization not adjustable
+* `fallback()` Set fallback localization
+* `locale()` Get current localization
+* `name()` Get current localization english name
+* `native()` Get current localization native name
+* `script()` Get current localization code script
+* `direction()` Get current localization read direction
+* `locales( $withNull = false )` Get available localizations, optional empty first row
