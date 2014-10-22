@@ -16,7 +16,7 @@ Facade Alias : Locale
 
 Step 1: Add to stack
 ```php
-// App\Providers\AppServiceProvider.php
+// App\Http\Kernel.php
 protected $stack = [
     ...
     'Sheepy85\L5Localization\Middleware\Localization',
