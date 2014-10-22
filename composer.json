@@ -1,6 +1,6 @@
 {
 	"name" : "sheepy85/l5-localization" ,
-	"description" : "" ,
+	"description" : "Simple Localization Middleware for Laravel 5" ,
 	"authors" : [
 		{
 			"name" : "sheepy85" ,
