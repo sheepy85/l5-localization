@@ -1,9 +1,9 @@
 <?php
 
-foreach ( Locale::locaes( true ) as $code => $locale ) {
+foreach ( Locale::locales( true ) as $code => $locale ) {
    Route::group( [
 	   'prefix' => $code ,
-	   'namespace' => 'App\Http\Controllers' ,
+	   'namespace' => '\App\Http\Controllers' ,
 	   ] , function() use( $code ) {
 
 	  Locale::router()->get( '/' , 'home' , 'HomeController@index' , $code );
