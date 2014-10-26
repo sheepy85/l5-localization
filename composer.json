@@ -1,6 +1,7 @@
 {
 	"name" : "sheepy85/l5-localization" ,
 	"description" : "Simple Localization Middleware for Laravel 5" ,
+	"license": "MIT",
 	"authors" : [
 		{
 			"name" : "sheepy85" ,
