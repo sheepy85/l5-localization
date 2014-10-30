@@ -24,3 +24,25 @@ else {
    }
 
 }
+
+/**
+ * Generate Current URL to another locale.
+ *
+ * @param  string  $code
+ * @return string
+ */
+if ( function_exists( 'url_locale' ) ) {
+
+    function url_locale( $code ) {
+        $route = Route::currentRouteName();
+
+        // if locale not set concanate code to route name
+        if ( !app( 'l5-localization' )->has() ) {
+            return app( 'url' )->route( "$code.$route" );
+        }
+
+        // else replace the locale code in route name
+        return app( 'url' )->route( substr_replace( $route , $code , 0 , strpos( $route , '.' ) ) );
+    }
+
+}
