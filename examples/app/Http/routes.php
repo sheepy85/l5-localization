@@ -1,6 +1,6 @@
 <?php
 
-foreach ( Locale::locales( true ) as $code => $locale ) {
+foreach ( Locale::codes( true ) as $code ) {
    Route::group( [
 	   'prefix' => $code ,
 	   'namespace' => '\App\Http\Controllers' ,
