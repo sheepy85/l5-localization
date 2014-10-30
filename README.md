@@ -63,7 +63,9 @@ Generate route:cache for all of your languages
 4 arg: Localization short code
 ```php
 // routes.php
-foreach ( Locale::locales( true ) as $code => $locale ) {
+foreach ( Locale::codes( true ) as $code ) {
+// or 
+//foreach ( Locale::locales( true ) as $code => $locale ) {
    Route::group( [
 	   'namespace' => '\App\Http\Controllers' ,
 	   'prefix' => $code , 
@@ -116,3 +118,4 @@ Api Locale::
 * `script()` Get current localization code script
 * `direction()` Get current localization read direction
 * `locales( $withNull = false )` Get available localizations, optional empty first row
+* `codes( $withNull = false )` Get available localization short codes, optional empty first row
