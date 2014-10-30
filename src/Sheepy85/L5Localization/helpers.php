@@ -31,7 +31,7 @@ else {
  * @param  string  $code
  * @return string
  */
-if ( function_exists( 'url_locale' ) ) {
+if ( ! function_exists( 'url_locale' ) ) {
 
     function url_locale( $code ) {
         $route = Route::currentRouteName();
