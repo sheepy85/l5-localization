@@ -165,7 +165,17 @@ class Localization {
     public function locales( $withNull = false ) {
         return $withNull ? array_merge( [ null => null] , $this->_locales ) : $this->_locales;
     }
-
+    
+    /**
+     * Get available localization short codes, optional empty first row
+     * 
+     * @param bool $withNull
+     * @return array
+     */
+    public function codes( $withNull = false ) {
+        return $withNull ? array_merge( [ null => null] , array_keys( $this->_locales ) ) : array_keys( $this->_locales );
+    }
+    
     /**
      * 
      * @return \Illuminate\Routing\Router
